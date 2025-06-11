@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+scikit-learn
+pandas
+numpy
+pydantic
+joblib
+nltk
+python-multipart
+requests
+kagglehub
+fastapi-profiler 
+prometheus-fastapi-instrumentator
+torch
+torchtext
+tokenizers
+tqdm
