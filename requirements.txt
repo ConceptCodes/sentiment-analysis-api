@@ -4,6 +4,7 @@ scikit-learn
 pandas
 numpy
 pydantic
+pydantic-settings
 joblib
 nltk
 python-multipart

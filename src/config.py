@@ -1,5 +1,6 @@
-from pydantic import BaseSettings, Field
-
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from functools import lru_cache
 
 class Config(BaseSettings):
     """
@@ -9,45 +10,50 @@ class Config(BaseSettings):
     max_len: int = Field(
         default=512,
         description="Maximum length of the input text sequences.",
-        env="MAX_LEN",
+        alias="MAX_LEN",
     )
 
     batch_size: int = Field(
         default=32,
         description="Batch size for training.",
-        env="BATCH_SIZE",
+        alias="BATCH_SIZE",
     )
     epochs: int = Field(
         default=5,
         description="Number of training epochs.",
-        env="EPOCHS",
+        alias="EPOCHS",
     )
     embed_dim: int = Field(
         default=128,
         description="Embedding dimension size.",
-        env="EMBED_DIM",
+        alias="EMBED_DIM",
     )
     hidden_dim: int = Field(
         default=256,
         description="Hidden layer dimension size.",
-        env="HIDDEN_DIM",
+        alias="HIDDEN_DIM",
     )
     vocab_size: int = Field(
         default=30522,
         description="Size of the vocabulary for the tokenizer.",
-        env="VOCAB_SIZE",
+        alias="VOCAB_SIZE",
     )
     output_dim: int = Field(
         default=3,
         description="Number of output classes.",
-        env="OUTPUT_DIM",
+        alias="OUTPUT_DIM",
     )
     pad_idx: int = Field(
         default=0,
         description="Padding index for sequences.",
-        env="PAD_IDX",
+        alias="PAD_IDX",
     )
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8"
+    )
+
+@lru_cache
+def get_settings() -> Config:
+    return Config()
