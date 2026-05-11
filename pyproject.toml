@@ -1,0 +1,36 @@
+[project]
+name = "sentiment-analysis-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.136.1",
+    "fastapi-profiler>=1.5.0",
+    "joblib>=1.5.3",
+    "kagglehub>=1.0.1",
+    "nltk>=3.9.4",
+    "numpy>=2.4.4",
+    "pandas>=3.0.2",
+    "prometheus-fastapi-instrumentator>=7.1.0",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.14.1",
+    "python-multipart>=0.0.28",
+    "requests>=2.33.1",
+    "scikit-learn>=1.8.0",
+    "tokenizers>=0.23.1",
+    "torch>=2.11.0",
+    "torchtext>=0.6.0",
+    "tqdm>=4.67.3",
+    "uvicorn>=0.46.0",
+]
+
+[project.scripts]
+sentiment-preprocess = "src.tokenize_dataset:main"
+sentiment-train = "src.train:main"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.0.3",
+]

@@ -2,7 +2,10 @@ import os
 import pandas as pd
 from tokenizers import Tokenizer, models, pre_tokenizers, decoders, normalizers
 from tokenizers.trainers import WordLevelTrainer
-from config import Config
+try:
+    from .config import Config
+except ImportError:  # pragma: no cover - fallback for direct script execution
+    from config import Config
 
 cfg = Config()
 
@@ -64,6 +67,6 @@ if __name__ == "__main__":
     cleaned_train_df = clean_data(test_file_path)
     cleaned_validation_df = clean_data(validation_file_path)
 
-    combined_df = pd.concat([cleaned_train_df, cleaned_train_df], ignore_index=True)
+    combined_df = pd.concat([cleaned_train_df, cleaned_validation_df], ignore_index=True)
 
     train_tokenizer(combined_df, vocab_size=cfg.vocab_size, output_path="data/tokenizer.json")
